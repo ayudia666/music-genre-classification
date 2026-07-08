@@ -1,105 +1,66 @@
-"""
-visualization.py
-
-Modul untuk membuat visualisasi audio (waveform dan mel-spectrogram)
-menggunakan matplotlib. Fungsi-fungsi di sini mengembalikan objek
-`matplotlib.figure.Figure`, sehingga dapat ditampilkan langsung oleh
-`app.py` menggunakan `st.pyplot(fig)`.
-"""
-
 import librosa
 import librosa.display
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.figure import Figure
 
-# Palet warna aplikasi, agar visualisasi konsisten dengan tema UI
-PRIMARY_COLOR = "#2563EB"
-SECONDARY_COLOR = "#06B6D4"
+PRIMARY_COLOR = "#c0c1ff"
+SECONDARY_COLOR = "#6bd8cb"
+BG_COLOR = "#0b1326"
+AXIS_COLOR = "#64748b"
 
 
 def plot_waveform(y: np.ndarray, sr: int, title: str = "Waveform") -> Figure:
-    """
-    Membuat plot waveform (amplitudo terhadap waktu) dari sinyal audio.
-
-    Parameters
-    ----------
-    y : np.ndarray
-        Sinyal audio.
-    sr : int
-        Sample rate sinyal audio.
-    title : str
-        Judul plot.
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        Objek figure yang siap ditampilkan dengan st.pyplot().
-    """
+    matplotlib.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(6, 3))
-    librosa.display.waveshow(y, sr=sr, ax=ax, color=PRIMARY_COLOR)
-    ax.set_title(title, fontsize=12, fontweight="bold")
-    ax.set_xlabel("Waktu (detik)")
-    ax.set_ylabel("Amplitudo")
+    fig.patch.set_facecolor(BG_COLOR)
+    ax.set_facecolor(BG_COLOR)
+    librosa.display.waveshow(y, sr=sr, ax=ax, color=PRIMARY_COLOR, alpha=0.85)
+    ax.set_title(title, fontsize=12, fontweight="bold", color="white", pad=12)
+    ax.set_xlabel("Waktu (detik)", color=AXIS_COLOR, fontsize=9)
+    ax.set_ylabel("Amplitudo", color=AXIS_COLOR, fontsize=9)
+    ax.tick_params(colors=AXIS_COLOR, labelsize=8)
+    for spine in ax.spines.values():
+        spine.set_color("rgba(255,255,255,0.06)")
     fig.tight_layout()
     return fig
 
 
 def plot_melspectrogram(y: np.ndarray, sr: int, title: str = "Mel-Spectrogram") -> Figure:
-    """
-    Membuat plot mel-spectrogram dari sinyal audio.
-
-    Parameters
-    ----------
-    y : np.ndarray
-        Sinyal audio.
-    sr : int
-        Sample rate sinyal audio.
-    title : str
-        Judul plot.
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        Objek figure yang siap ditampilkan dengan st.pyplot().
-    """
+    matplotlib.style.use("dark_background")
     mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
     mel_spec_db = librosa.power_to_db(mel_spec, ref=np.max)
 
     fig, ax = plt.subplots(figsize=(6, 3))
-    img = librosa.display.specshow(mel_spec_db, sr=sr, x_axis="time", y_axis="mel", ax=ax, cmap="viridis")
-    ax.set_title(title, fontsize=12, fontweight="bold")
-    fig.colorbar(img, ax=ax, format="%+2.0f dB")
+    fig.patch.set_facecolor(BG_COLOR)
+    ax.set_facecolor(BG_COLOR)
+    img = librosa.display.specshow(
+        mel_spec_db, sr=sr, x_axis="time", y_axis="mel",
+        ax=ax, cmap="plasma",
+    )
+    ax.set_title(title, fontsize=12, fontweight="bold", color="white", pad=12)
+    ax.tick_params(colors=AXIS_COLOR, labelsize=8)
+    for spine in ax.spines.values():
+        spine.set_color("rgba(255,255,255,0.06)")
+    cbar = fig.colorbar(img, ax=ax, format="%+2.0f dB")
+    cbar.ax.yaxis.set_tick_params(color=AXIS_COLOR, labelsize=8)
+    plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), color=AXIS_COLOR)
     fig.tight_layout()
     return fig
 
 
 def plot_vote_bar_chart(vote_counts: dict, final_genre: str) -> Figure:
-    """
-    Membuat bar chart hasil majority voting antar genre.
-
-    Genre dengan hasil akhir (final_genre) ditonjolkan dengan warna
-    berbeda dibandingkan genre lainnya.
-
-    Parameters
-    ----------
-    vote_counts : dict
-        Dictionary {nama_genre: jumlah_vote}.
-    final_genre : str
-        Genre hasil akhir majority voting (akan ditonjolkan warnanya).
-
-    Returns
-    -------
-    matplotlib.figure.Figure
-        Objek figure yang siap ditampilkan dengan st.pyplot().
-    """
     sorted_items = sorted(vote_counts.items(), key=lambda x: -x[1])
     genre_names = [g for g, _ in sorted_items]
     genre_votes = [c for _, c in sorted_items]
 
-    colors = ["#22C55E" if g == final_genre else "#CBD5E1" for g in genre_names]
+    colors = [PRIMARY_COLOR if g == final_genre else "rgba(128, 131, 255, 0.2)" for g in genre_names]
 
+    matplotlib.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(7, 4))
+    fig.patch.set_facecolor(BG_COLOR)
+    ax.set_facecolor(BG_COLOR)
     bars = ax.bar(genre_names, genre_votes, color=colors)
 
     for bar, count in zip(bars, genre_votes):
@@ -110,10 +71,15 @@ def plot_vote_bar_chart(vote_counts: dict, final_genre: str) -> Figure:
             ha="center",
             fontsize=10,
             fontweight="bold",
+            color="white",
         )
 
-    ax.set_ylabel("Jumlah Vote")
-    ax.set_title("Hasil Majority Voting per Genre", fontsize=12, fontweight="bold")
-    plt.xticks(rotation=30, ha="right")
+    ax.set_ylabel("Jumlah Vote", color=AXIS_COLOR, fontsize=10)
+    ax.set_title("Hasil Majority Voting per Genre", fontsize=13, fontweight="bold", color="white")
+    ax.tick_params(colors=AXIS_COLOR, labelsize=9)
+    plt.xticks(rotation=30, ha="right", color=AXIS_COLOR)
+    for spine in ax.spines.values():
+        spine.set_color("rgba(255,255,255,0.06)")
+    ax.yaxis.label.set_color(AXIS_COLOR)
     fig.tight_layout()
     return fig

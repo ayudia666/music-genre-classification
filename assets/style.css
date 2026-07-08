@@ -1,159 +1,190 @@
 /* =========================================================
-   Music Genre Classification - Custom Styling
-   Palet warna:
-   Primary    #2563EB
-   Secondary  #06B6D4
-   Background #F8FAFC
-   Success    #22C55E
-========================================================= */
+   Music Genre Classification - Dark Glassmorphism Theme
+   Palette: Material 3 Dark (indigo/teal)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 html, body, [class*="css"] {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Background utama aplikasi */
+/* ---------- Main Background ---------- */
 .stApp {
-    background-color: #F8FAFC;
+    background-color: #0b1326;
+    color: #dae2fd;
+}
+.stApp > header { background-color: transparent; }
+#MainMenu, footer, .stDeployButton { display: none; }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #dae2fd !important;
+}
+p, li, span, div, label { color: #dae2fd; }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0b1326; }
+::-webkit-scrollbar-thumb { background: #2d3449; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #464554; }
+
+/* ---------- Glass Card ---------- */
+.custom-card, .glass-card {
+    background: rgba(23, 31, 51, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    margin-bottom: 0.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.custom-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+}
+
+.section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #dae2fd !important;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* ---------- Hero Section ---------- */
 .hero-container {
-    background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+    background: linear-gradient(135deg, #494bd6 0%, #29a195 100%);
     padding: 2.5rem 2rem;
     border-radius: 18px;
     text-align: center;
     color: white;
     margin-bottom: 1.75rem;
-    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 15px 40px rgba(73, 75, 214, 0.3);
 }
-
 .hero-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 2.3rem;
     font-weight: 800;
     margin-bottom: 0.4rem;
+    color: white !important;
 }
-
 .hero-subtitle {
     font-size: 1.05rem;
     font-weight: 500;
     opacity: 0.95;
     margin-bottom: 0.6rem;
+    color: rgba(255, 255, 255, 0.9);
 }
-
 .hero-description {
     font-size: 0.92rem;
     opacity: 0.85;
     max-width: 720px;
     margin: 0 auto;
-}
-
-/* ---------- Card Umum ---------- */
-.custom-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-    border: 1px solid #E2E8F0;
-    margin-bottom: 1.25rem;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.custom-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.10);
-}
-
-.section-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #0F172A;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* ---------- Prediction Result Card ---------- */
 .result-card {
-    background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+    background: linear-gradient(135deg, #494bd6 0%, #29a195 100%);
     border-radius: 18px;
     padding: 2rem;
     text-align: center;
     color: white;
-    box-shadow: 0 10px 26px rgba(34, 197, 94, 0.28);
+    box-shadow: 0 15px 35px rgba(73, 75, 214, 0.35);
     margin-bottom: 1.5rem;
+    animation: glow-pulse 3s infinite alternate;
 }
-
+@keyframes glow-pulse {
+    0% { box-shadow: 0 0 20px rgba(128, 131, 255, 0.2); }
+    100% { box-shadow: 0 0 40px rgba(128, 131, 255, 0.5); }
+}
 .result-label {
     font-size: 1rem;
     opacity: 0.9;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
 }
-
 .result-genre {
-    font-size: 2.6rem;
-    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
     margin-top: 0.3rem;
+    color: white;
+    letter-spacing: -0.02em;
 }
 
 /* ---------- Metric Card ---------- */
-.metric-card {
-    background: white;
+.metric-card, [data-testid="metric-container"] {
+    background: rgba(23, 31, 51, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
-    padding: 1.1rem;
+    padding: 0.75rem;
     text-align: center;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
 .metric-value {
-    font-size: 1.6rem;
+    font-size: 1.25rem;
     font-weight: 800;
-    color: #2563EB;
+    color: #c0c1ff;
 }
-
 .metric-label {
-    font-size: 0.85rem;
-    color: #64748B;
+    font-size: 0.75rem;
+    color: #64748b;
     font-weight: 600;
     margin-top: 0.2rem;
 }
 
 /* ---------- Sidebar ---------- */
 section[data-testid="stSidebar"] {
-    background-color: #0F172A;
+    background-color: #060e20;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
-
 section[data-testid="stSidebar"] * {
-    color: #E2E8F0 !important;
+    color: #e2e8f0 !important;
 }
-
 .sidebar-app-name {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.3rem;
     font-weight: 800;
-    color: white !important;
+    color: #c0c1ff !important;
     margin-top: 0.4rem;
 }
-
 .sidebar-divider {
     border: none;
-    border-top: 1px solid rgba(226, 232, 240, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     margin: 1rem 0;
 }
-
 .sidebar-info-item {
     font-size: 0.85rem;
     margin-bottom: 0.55rem;
+    color: #c7c4d7;
 }
-
 .sidebar-info-label {
-    color: #94A3B8 !important;
+    color: #64748b !important;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.72rem;
     letter-spacing: 0.04em;
+    padding-left: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.sidebar-info-label:nth-of-type(1) {
+    border-left: 3px solid #c0c1ff;
+}
+.sidebar-info-label:nth-of-type(2) {
+    border-left: 3px solid #6bd8cb;
+}
+.sidebar-info-label:nth-of-type(3) {
+    border-left: 3px solid #fbbf24;
+}
+.sidebar-info-label:nth-of-type(4) {
+    border-left: 3px solid #f472b6;
 }
 
 /* ---------- Pipeline Diagram ---------- */
@@ -165,55 +196,185 @@ section[data-testid="stSidebar"] * {
     gap: 0.4rem;
     padding: 1rem 0.5rem;
 }
-
 .pipeline-step {
-    background: #EFF6FF;
-    border: 1px solid #BFDBFE;
-    color: #1D4ED8;
+    background: rgba(128, 131, 255, 0.12);
+    border: 1px solid rgba(128, 131, 255, 0.25);
+    color: #a5b4fc;
     padding: 0.5rem 0.9rem;
     border-radius: 10px;
     font-size: 0.82rem;
     font-weight: 600;
     white-space: nowrap;
 }
-
 .pipeline-arrow {
-    color: #94A3B8;
+    color: rgba(128, 131, 255, 0.4);
     font-size: 1.1rem;
     font-weight: 700;
 }
 
-/* ---------- Badge Vote (checklist) ---------- */
+/* ---------- Badge Vote ---------- */
 .badge-match {
-    color: #16A34A;
+    color: #6bd8cb;
     font-weight: 800;
 }
-
 .badge-mismatch {
-    color: #EF4444;
+    color: #ff516a;
     font-weight: 800;
 }
 
 /* ---------- Divider ---------- */
-.custom-divider {
+.custom-divider, hr {
     height: 1px;
-    background: #E2E8F0;
+    background: rgba(255, 255, 255, 0.06);
     margin: 1.5rem 0;
     border: none;
 }
 
 /* ---------- Buttons ---------- */
 .stButton > button {
-    background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
-    color: white;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    padding: 0.6rem 1.4rem;
-    transition: opacity 0.15s ease;
+    background: linear-gradient(135deg, #494bd6 0%, #29a195 100%) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 0.65rem 1.5rem !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 8px 25px rgba(128, 131, 255, 0.25) !important;
+    font-size: 0.95rem !important;
+}
+.stButton > button:hover {
+    opacity: 0.95 !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 12px 35px rgba(128, 131, 255, 0.35) !important;
 }
 
-.stButton > button:hover {
-    opacity: 0.9;
-    color: white;
+/* ---------- File Uploader ---------- */
+[data-testid="stFileUploader"] {
+    background: rgba(23, 31, 51, 0.4);
+    backdrop-filter: blur(12px);
+    border: 2px dashed rgba(192, 193, 255, 0.2);
+    border-radius: 16px;
+    padding: 0.5rem;
+    transition: border-color 0.3s;
+}
+[data-testid="stFileUploader"]:hover {
+    border-color: rgba(192, 193, 255, 0.5);
+}
+[data-testid="stFileUploader"] section {
+    color: #e2e8f0;
+}
+[data-testid="stFileUploader"] button {
+    background: rgba(128, 131, 255, 0.2) !important;
+    color: #a5b4fc !important;
+    border: 1px solid rgba(128, 131, 255, 0.3) !important;
+    border-radius: 10px !important;
+}
+
+/* ---------- Audio Player ---------- */
+audio {
+    border-radius: 12px;
+    width: 100%;
+}
+audio::-webkit-media-controls-panel {
+    background: #171f33;
+}
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: #dae2fd;
+    font-weight: 600;
+}
+
+/* ---------- DataFrames ---------- */
+[data-testid="stDataFrame"] {
+    background: rgba(23, 31, 51, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+[data-testid="stDataFrame"] div {
+    color: #e2e8f0;
+}
+
+/* ---------- Status/Progress ---------- */
+[data-testid="stStatusWidget"] {
+    background: rgba(23, 31, 51, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(12px);
+}
+.stSpinner {
+    color: #c0c1ff;
+}
+
+/* ---------- Alerts ---------- */
+.stAlert {
+    background: rgba(23, 31, 51, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    color: #e2e8f0 !important;
+}
+.stAlert p { color: #e2e8f0 !important; }
+.stInfo {
+    background: rgba(128, 131, 255, 0.1) !important;
+    border: 1px solid rgba(128, 131, 255, 0.2) !important;
+}
+.stWarning {
+    background: rgba(255, 178, 183, 0.08) !important;
+    border: 1px solid rgba(255, 178, 183, 0.15) !important;
+}
+.stError {
+    background: rgba(255, 180, 171, 0.08) !important;
+    border: 1px solid rgba(255, 180, 171, 0.15) !important;
+}
+
+/* ---------- Expander ---------- */
+.streamlit-expanderHeader {
+    background: rgba(23, 31, 51, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    color: #e2e8f0 !important;
+    font-weight: 600 !important;
+}
+.streamlit-expanderHeader:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+.streamlit-expanderContent {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* ---------- Inline Plotly ---------- */
+.js-plotly-plot {
+    border-radius: 12px;
+}
+
+/* ---------- Custom Info Box ---------- */
+.custom-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(128, 131, 255, 0.1);
+    border: 1px solid rgba(128, 131, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    color: #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+/* ---------- Inline SVG Icons ---------- */
+.section-title img, .hero-title img, .result-label img,
+.pipeline-step img, .pipeline-arrow img {
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* ---------- Media Query ---------- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    .result-genre {
+        font-size: 2rem;
+    }
 }
